@@ -39,3 +39,25 @@ export class RememberToFileFunction implements IRememberFunction {
     });
   }
 }
+
+/**
+ * 出力先が標準出力のタスク
+ */
+export class RememberToStdout implements IRememberFunction {
+  public memory: string;
+  public timeToProcess: number;
+
+  constructor(memory: string, timeToProcess: number) {
+    this.memory = memory;
+    this.timeToProcess = timeToProcess;
+  }
+
+  public remenber(): Promise<void> {
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        console.log(this.memory);
+        resolve();
+      }, this.timeToProcess);
+    });
+  }
+}
